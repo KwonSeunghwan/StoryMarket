@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header">
+    <div class="header-container">
+        <div class="wrapper">
+            <div class="header-content">
+                <div class="top-menu-content">
+                    <div class="top-menu">
+                        <ul class="head-menu">
+                            <li><a th:href="@{/members/new}">회원가입</a></li>
+                            <li><a th:href="@{/members/login}">로그인</a></li>
+                        </ul>
+                          <!--
+                                <li><a href="memberInfo.html">마이페이지</a></li>
+                                <li><a href="basket.html">장바구니</a></li>
+                            -->
+                    </div>
+                </div>
+                <div class="top-various-content">
+                    <div class="logo-content">
+                        <a th:href="@{/}"><img th:src="@{/images/logo-01.png}"></a>
+                    </div>
+                    <form th:action="@{/}" method="get">
+                        <div class="search-content">
+                            <select class="search-list">
+                                <option disabled>선택</option>
+                                <option value="상품명">상품명</option>
+                                <option value="판매자">판매자</option>
+                            </select>
+
+                            <input name="searchQuery" type="text" placeholder="상품명, 판매자로 검색">
+                            <button type="submit"><img th:src="@{/images/search.png}" class="search_img" alt="검색"></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="top-category">
+
+                    <div class="menu-category">
+                        <div class="gnbmenu">
+                            <a href="#">
+                                <img th:src="@{/images/categorybtn.png}">
+                                카테고리
+                            </a>
+
+                            <ul class="head-submenu"> <!-- absolute 되는 서브메뉴 -->
+                                <li><a href="PC_LI_01.html">농산물</a></li>
+                                <li><a href="PC_LI_02.html">수산물</a></li>
+                                <li><a href="PC_LI_03.html">축산물</a></li>
+                            </ul>
+
+                        </div>
+
+
+                        <div class="main-category">
+                            <ul>
+                                <li><a href="menu_Seasonal.html">제철특산품</a></li>
+                                <li><a href="menu_ProdMap.html">특산품지도</a></li>
+                                <li><a href="menu-Intro.html">마켓스토리</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</html>

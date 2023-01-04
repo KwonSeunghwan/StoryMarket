@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="headerFragment">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link th:href="@{/css/common.css}" type="text/css" rel="stylesheet">
+<link th:href="@{/images/icon.ico}" rel="shortcut icon" type="image/x-icon">
+<script th:src="@{/js/jquery-3.5.1.min.js}"></script>
+<script th:src="@{/js/jquery-user.js}"></script>
+<title>먹거리의 이야기 :: 스토리마켓</title>
+</head>
+<body>
+		<header>
+			<div class="header-container">
+				<div class="wrapper">
+					<div class="header-content">
+						<div class="top-menu-content">
+							<div class="top-menu">
+								<ul class="head-menu">
+								<!-- 	<li><a href="regist.html">회원가입</a></li>
+									<li><a href="login.html">로그인</a></li>
+									<li><a href="basket.html">장바구니</a></li> -->
+									<li><a sec:authorize="isAnonymous()"
+										th:href="@{/user/login}">로그인</a></li>
+									<li><a sec:authorize="isAuthenticated()"
+										th:href="@{/user/logout}">로그아웃</a></li>
+									<li><a sec:authorize="isAnonymous()"
+										th:href="@{/user/signup}">회원가입</a></li>
+									<li><a sec:authorize="hasRole('ROLE_MEMBER')"
+										th:href="@{/user/info}">장바구니</a></li>	
+									<li><a sec:authorize="hasRole('ROLE_MEMBER')"
+										th:href="@{/user/info}">마이페이지</a></li>
+									<li><a sec:authorize="hasRole('ROLE_ADMIN')"
+										th:href="@{/admin}">관리자</a></li>
+								</ul>
+								<!--
+                              
+                                    <li><a href="basket.html">장바구니</a></li> 주소 추가 
+                                -->
+							</div>
+						</div>
+						<div class="top-various-content">
+							<div class="logo-content">
+								<a href="index.html"><img th:src="@{/images/logo-01.png}"></a>
+							</div>
+							<div class="search-content">
+								<select class="search-list">
+									<option disabled>선택</option>
+									<option value="상품명">상품명</option>
+									<option value="판매자">판매자</option>
+								</select> <input type="text" placeholder="상품명, 판매자로 검색"> <a
+									href="#"><img th:src="@{/images/search.png}"
+									class="search_img" alt="검색"></a>
+							</div>
+						</div>
+						<div class="top-category">
+							<div class="menu-category">
+								<div class="gnbmenu">
+									<a href="#"> <img
+										th:href="@{/resources/images/categorybtn.png}"> 카테고리
+									</a>
+
+									<ul class="head-submenu">
+										<!-- absolute 되는 서브메뉴 -->
+										<li><a href="PC_LI_01.html">농산물</a></li>
+										<li><a href="PC_LI_02.html">수산물</a></li>
+										<li><a href="PC_LI_03.html">축산물</a></li>
+									</ul>
+
+								</div>
+
+								<div class="main-category">
+									<ul>
+										<li><a href="menu_Seasonal.html">제철특산품</a></li>
+										<li><a href="menu_ProdMap.html">특산품지도</a></li>
+										<li><a href="menu-Intro.html">마켓스토리</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+</th:block>

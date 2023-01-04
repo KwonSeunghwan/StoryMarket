@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="sidebar">
+  <div id="quick_menu">
+    <div class="quick_img_wrapper">
+      <a href="#" target="_blank"><img class="quick_img" th:src="@{/images/quick_link_img.jpg}"></a>
+    </div>
+    <div class="side_menu">
+      <ul>
+        <!-- 로그아웃 상태의 사이드바 메뉴 -->
+        <li><a th:href="@{/members/new}" class="link_menu" target="_blank">회원가입</a></li>
+        <li><a href="../../../../../../Downloads/story-market/menu_Seasonal.html" class="link_menu" target="_blank">제철특산품</a></li>
+        <!-- 로그인 상태의 사이드바 메뉴 -->
+        <!--
+        <li><a href="basket.html" class="link_menu" target="_blank">장바구니</a></li>
+        <li><a href="#" class="link_menu" target="_blank">마이페이지</a></li>
+        <li><a href="#" class="link_menu" target="_blank">판매자신청</a></li>
+        -->
+      </ul>
+    </div>
+  </div>
+
+  <div id="top_btn">
+    <a href="" onclick="goTop()"><img th:src="@{/images/top_button.png}"></a>
+  </div>
+</div>
+</html>
