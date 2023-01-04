@@ -34,7 +34,7 @@ public class MemberDTO {
 
 	public Member toEntity() {
 		return Member.builder()
-				.loginId(loginId)
+				.id(loginId)
 				.password(password)
 				.name(name)
 				.email(email)

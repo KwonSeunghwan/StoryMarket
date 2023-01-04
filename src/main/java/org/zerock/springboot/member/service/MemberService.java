@@ -14,7 +14,7 @@ public interface MemberService {
 	// DTO -> Entity
     default Member dtoToEntity(MemberDTO memberDTO){
         Member member = Member.builder()
-        		.loginId(memberDTO.getLoginId())
+        		.id(memberDTO.getLoginId())
         		.password(memberDTO.getPassword())
         		.name(memberDTO.getName())
         		.email(memberDTO.getEmail())
@@ -33,7 +33,7 @@ public interface MemberService {
     // Entity(Member) -> MemberDTO
     default MemberDTO entityToDTO(Member member) {
         MemberDTO memberDTO = MemberDTO.builder()
-        		.loginId(member.getLoginId())
+        		.loginId(member.getId())
         		.password(member.getPassword())
         		.name(member.getName())
         		.email(member.getEmail())

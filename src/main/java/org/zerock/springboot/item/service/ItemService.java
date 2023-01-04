@@ -2,8 +2,7 @@ package org.zerock.springboot.item.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,10 +26,8 @@ import lombok.RequiredArgsConstructor;
 public class ItemService {
     private final ItemRepository itemRepository;
     private final ItemImgService itemImgService;
-	/*
     private final ItemImgRepository itemImgRepository;
 
-*/
     public Long saveItem(ItemFormDto itemFormDto,
                          List<MultipartFile> itemImgFileList)throws Exception{
 
@@ -52,24 +49,26 @@ public class ItemService {
 
             return item.getId();
     }
-/*
+
     @Transactional(readOnly = true)
     public ItemFormDto getItemDtl(Long itemId){
         List<ItemImg> itemImgList =
                 itemImgRepository.findByItemIdOrderByIdAsc(itemId);
-        List<ItemImgDto>itemImgDtoList = new ArrayList<>();
+        List<ItemImgDto> itemImgDtoList = new ArrayList<>();
         for(ItemImg itemImg : itemImgList){
             ItemImgDto itemImgDto = ItemImgDto.of(itemImg);
             itemImgDtoList.add(itemImgDto);
         }
 
-        Item item = itemRepository.findById(itemId)
-                .orElseThrow(EntityNotFoundException::new);
+        Optional<Item> result = itemRepository.findById(itemId);
+        Item item= result.get();
         ItemFormDto itemFormDto = ItemFormDto.of(item);
+        itemFormDto.setRegister(item.getRegister().getId());
         itemFormDto.setItemImgDtoList(itemImgDtoList);
         return itemFormDto;
     }
 
+    /*
     public Long updateItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList)throws Exception{
         //상품 수정
         Item item = itemRepository.findById(itemFormDto.getId())

@@ -120,7 +120,7 @@
         <div class="detail-product">
           <div class="left-product-content">
             <div class="product-img">
-              <img th:src="${item.itemImgDtoList[0].imgUrl}" th:alt="${item.itemNm}">
+              <img th:src="|/display?fileName=${item.itemImgDtoList[0].imgUrl}|" th:alt="${item.itemNm}">
             </div>
           </div>
           <div class="right-product-content">
@@ -135,7 +135,7 @@
             </div>
             <dl>
               <dt>판매자</dt>
-              <dd>yeondu</dd>
+              <dd>[[${item.register}]]</dd>
             </dl>
             <dl>
               <dt>판매단위</dt>
@@ -176,7 +176,7 @@
         </div>
 
         <div th:each="itemImg : ${item.itemImgDtoList}" class="text-center">
-          <img th:if="${not #strings.isEmpty(itemImg.imgUrl)}" th:src="${itemImg.imgUrl}" class="rounded mgb-15" width="800">
+          <img th:if="${not #strings.isEmpty(itemImg.imgUrl)}" th:src="|/display?fileName=${itemImg.imgUrl}|" class="rounded mgb-15" width="800">
         </div>
 
       </div>

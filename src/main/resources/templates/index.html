@@ -35,7 +35,7 @@
                     <ul class="product-list">
                         <th:block th:each="item, status: ${items.getContent()}">
                         <li>
-                            <a th:href="'/item/' +${item.id}">
+                            <a th:href="'/seller/item/' +${item.id}">
                                 <img th:src="|/display?fileName=${item.imgUrl}|">
                                 <div class="product-info">
                                     <div class="product-name">

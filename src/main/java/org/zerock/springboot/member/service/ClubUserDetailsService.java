@@ -52,7 +52,7 @@ public class ClubUserDetailsService implements UserDetailsService {
 
 	private MemberDTO entityToDTO(Member member) {
 		MemberDTO memberDTO = MemberDTO.builder()
-        		.loginId(member.getLoginId())
+        		.loginId(member.getId())
         		.password(member.getPassword())
         		.name(member.getName())
         		.email(member.getEmail())

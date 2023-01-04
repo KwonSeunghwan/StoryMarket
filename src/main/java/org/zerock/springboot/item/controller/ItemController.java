@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/item")
 @RequiredArgsConstructor
 @Log4j2
 public class ItemController {
@@ -61,21 +60,23 @@ public class ItemController {
 
         return "redirect:/";
     }
-    /*
+
     @GetMapping(value = "/seller/item/{itemId}")
     public String itemDtl(@PathVariable("itemId")Long itemId, Model model){
         try {
             ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
-            model.addAttribute("itemFormDto", itemFormDto);
+            model.addAttribute("item", itemFormDto);
         }catch (EntityNotFoundException e){
             model.addAttribute("errorMessage", "존재하지 않는 상품 입니다.");
             model.addAttribute("itemFormDto", new ItemFormDto());
             return "item/itemForm";
         }
-
-        return "item/itemForm";
+        
+        return "item/itemDtl";
+//        return "item/itemForm";
     }
 
+    /*
     @PostMapping(value = "/seller/item/{itemId}")
     public String itemUpdate(@Valid ItemFormDto itemFormDto,
     BindingResult bindingResult, @RequestParam("itemImgFile") List<MultipartFile>itemImgFileList, Model model){
