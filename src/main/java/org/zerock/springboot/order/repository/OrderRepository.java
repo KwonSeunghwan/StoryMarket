@@ -11,11 +11,11 @@ import org.zerock.springboot.order.entity.Order;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query("select o from Order o "+
-    "where o.member.email = :email " +
+    "where o.member.id = :id " +
     "order by o.orderDate desc")
-    List<Order>findOrders(@Param("email")String email, Pageable pageable);
+    List<Order>findOrders(@Param("id")String id, Pageable pageable);
 
     @Query("select count(o) from Order o " +
-            "where o.member.email = :email")
-    Long countOrder(@Param("email")String email);
+            "where o.member.id = :id")
+    Long countOrder(@Param("id")String id);
 }
