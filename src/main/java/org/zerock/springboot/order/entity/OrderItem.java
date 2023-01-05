@@ -13,7 +13,7 @@ import org.zerock.springboot.item.entity.Item;
 public class OrderItem extends BaseEntity{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_item_id")
     private Long id;
 

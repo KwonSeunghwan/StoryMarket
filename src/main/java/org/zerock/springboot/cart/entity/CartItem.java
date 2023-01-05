@@ -14,7 +14,7 @@ import org.zerock.springboot.item.entity.Item;
 @Table(name = "cart_item")
 public class CartItem extends BaseEntity{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_item_id")
     private Long id;
 
@@ -22,7 +22,7 @@ public class CartItem extends BaseEntity{
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 

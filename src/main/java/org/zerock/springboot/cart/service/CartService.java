@@ -8,9 +8,11 @@ import org.zerock.springboot.order.service.OrderService;
 import org.zerock.springboot.cart.entity.Cart;
 import org.zerock.springboot.cart.entity.CartItem;
 import org.zerock.springboot.item.entity.Item;
+import org.zerock.springboot.item.entity.ItemImg;
 import org.zerock.springboot.member.entity.Member;
 import org.zerock.springboot.cart.repository.CartItemRepository;
 import org.zerock.springboot.cart.repository.CartRepository;
+import org.zerock.springboot.item.repository.ItemImgRepository;
 import org.zerock.springboot.item.repository.ItemRepository;
 import org.zerock.springboot.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,12 +32,13 @@ import java.util.Optional;
 public class CartService {
 
     private final ItemRepository itemRepository;
+    private final ItemImgRepository imageRepository;
     private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
     private final OrderService orderService;
 
-    public Long addCart(CartItemDto cartItemDto,String mid){
+    public Long addCart(CartItemDto cartItemDto, String mid){
         Item item = itemRepository.findById(cartItemDto.getItemId())
                 .orElseThrow(EntityExistsException::new);
         Optional<Member> result = memberRepository.findById(mid);
@@ -59,7 +62,6 @@ public class CartService {
             cartItemRepository.save(cartItem);
             return cartItem.getId();
         }
-
     }
 
     @Transactional(readOnly = true)
@@ -73,12 +75,25 @@ public class CartService {
             return cartDetailDtoList;
         }
 
-        cartDetailDtoList = cartItemRepository.findCartDetailDtoList(cart.getId());
+        List<Object[]> itemList = cartItemRepository.findCartDetailDtoList(cart.getId());
+        
+        for(Object[] objList : itemList) {
+        	CartItem ci = (CartItem)objList[0];
+        	Item item = (Item)objList[1];
+        	CartDetailDto dto = entityToDto(ci, item);
+        	cartDetailDtoList.add(dto);
+        }
 
         return cartDetailDtoList;
     }
 
-    @Transactional(readOnly = true)
+    private CartDetailDto entityToDto(CartItem ci, Item item) {
+    	ItemImg ii = imageRepository.findByItemIdAndRepimgYn(item.getId(), "Y");
+		return new CartDetailDto(
+				ci.getId(), item.getItemNm(), item.getPrice(), ci.getCount(), ii.getImgUrl());
+	}
+
+	@Transactional(readOnly = true)
     public boolean validateCartItem(Long cartItemId, String mid){
         Optional<Member> result = memberRepository.findById(mid);
         Member curMember = result.get();

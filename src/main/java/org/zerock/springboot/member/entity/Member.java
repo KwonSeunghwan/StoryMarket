@@ -26,7 +26,7 @@ import lombok.ToString;
 public class Member extends BaseEntity {
 
 	@Id
-	@Column(name = "cart_id", length = 20, nullable = false, unique = true)
+	@Column(name = "login_id", length = 20, nullable = false)
 	private String id; // 로그인용 ID 값
 
 	@Column(length = 100, nullable = false)

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ import org.zerock.springboot.cart.dto.CartDetailDto;
 import org.zerock.springboot.cart.dto.CartItemDto;
 import org.zerock.springboot.cart.dto.CartOrderDto;
 import org.zerock.springboot.cart.service.CartService;
+import org.zerock.springboot.member.dto.AuthMemberDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,7 +35,7 @@ public class CartController {
 
     @PostMapping(value = "/cart")
     public @ResponseBody ResponseEntity order(@RequestBody @Valid CartItemDto cartItemDto,
-                                              BindingResult bindingResult, Principal principal){
+    		BindingResult bindingResult, @AuthenticationPrincipal AuthMemberDTO authMember){
         if (bindingResult.hasErrors()){
             StringBuilder sb = new StringBuilder();
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
@@ -42,10 +44,10 @@ public class CartController {
             }
             return new ResponseEntity<String>(sb.toString(), HttpStatus.BAD_REQUEST);
         }
-        String email = principal.getName();
+        String loginId = authMember.getMember().getLoginId();
         Long cartItemId;
         try {
-            cartItemId = cartService.addCart(cartItemDto, email);
+            cartItemId = cartService.addCart(cartItemDto, loginId);
         }catch (Exception e){
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

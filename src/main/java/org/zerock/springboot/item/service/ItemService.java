@@ -17,6 +17,7 @@ import org.zerock.springboot.item.entity.ItemImg;
 import org.zerock.springboot.item.repository.ItemImgRepository;
 import org.zerock.springboot.item.repository.ItemRepository;
 import org.zerock.springboot.main.dto.MainItemDto;
+import org.zerock.springboot.member.entity.Member;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,6 +34,8 @@ public class ItemService {
 
         //상품 등록
         Item item = itemFormDto.createItem();
+        Member register = Member.builder().id(itemFormDto.getRegister()).build();
+        item.setRegister(register);
         itemRepository.save(item);
 
         //이미지 등록
