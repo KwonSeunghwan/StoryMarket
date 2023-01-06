@@ -54,10 +54,14 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom   {
     private BooleanExpression searchByLike(String searchBy, String searchQuery){
         if (StringUtils.equals("itemNm", searchBy)){
             return QItem.item.itemNm.like("%" +searchQuery+ "%");
-        }else if(StringUtils.equals("createdBy", searchBy)){
+        } else if(StringUtils.equals("createdBy", searchBy)){
         	LocalDateTime from = conversionStrToLocalDateTime(searchBy + " 00:00:00");
 			LocalDateTime to = conversionStrToLocalDateTime(searchBy + " 23:59:59");
             return QItem.item.regDate.between(from, to);
+        } else if(StringUtils.equals("seller", searchBy)) {
+        	return QItem.item.register.id.like("%" +searchQuery+ "%");
+        }  else if(StringUtils.equals("category", searchBy)) {
+        	return QItem.item.category.like("%" +searchQuery+ "%");
         }
 
         return null;
@@ -104,7 +108,8 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom   {
                 .from(itemImg)
                 .join(itemImg.item, item)
                 .where(itemImg.repimgYn.eq("Y"))
-                .where(itemNmLike(itemSearchDto.getSearchQuery()))
+                .where(searchByLike(itemSearchDto.getSearchBy(),itemSearchDto.getSearchQuery()))
+//                .where(itemNmLike(itemSearchDto.getSearchQuery()))
                 .orderBy(item.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())

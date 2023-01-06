@@ -21,11 +21,11 @@
                         <a th:href="@{/}"><img th:src="@{/images/logo-01.png}"></a>
                     </div>
                     <form th:action="@{/}" method="get">
-                        <div class="search-content">
+                        <div class="search-content" name="searchBy">
                             <select class="search-list">
                                 <option disabled>선택</option>
-                                <option value="상품명">상품명</option>
-                                <option value="판매자">판매자</option>
+                                <option value="itemNm">상품명</option>
+                                <option value="seller">판매자</option>
                             </select>
 
                             <input name="searchQuery" type="text" placeholder="상품명, 판매자로 검색">
@@ -43,9 +43,9 @@
                             </a>
 
                             <ul class="head-submenu"> <!-- absolute 되는 서브메뉴 -->
-                                <li><a href="PC_LI_01.html">농산물</a></li>
-                                <li><a href="PC_LI_02.html">수산물</a></li>
-                                <li><a href="PC_LI_03.html">축산물</a></li>
+                                <li><a th:href="@{/(searchBy='category', searchQuery='농산물')}">농산물</a></li>
+                                <li><a th:href="@{/(searchBy='category', searchQuery='수산물')}">수산물</a></li>
+                                <li><a th:href="@{/(searchBy='category', searchQuery='축산물')}">축산물</a></li>
                             </ul>
 
                         </div>
