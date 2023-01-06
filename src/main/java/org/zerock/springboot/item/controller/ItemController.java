@@ -35,7 +35,7 @@ public class ItemController {
     @GetMapping(value = "/sell/item/new")
     public String itemForm(Model model) {
         model.addAttribute("itemFormDto", new ItemFormDto());
-        return "/item/itemForm";
+        return "item/itemForm";
     }
 
     @PostMapping(value = "/sell/item/new")
