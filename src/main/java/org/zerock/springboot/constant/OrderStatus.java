@@ -1,5 +1,5 @@
 package org.zerock.springboot.constant;
 
 public enum OrderStatus {
-    ORDER, CANCLE
+    ORDER, PAY, DELIVERING, ARRIVAL, ADMIT, CANCLE
 }

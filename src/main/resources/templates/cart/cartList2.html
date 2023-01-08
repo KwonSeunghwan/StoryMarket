@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout1}">
-
-<head>
-  <meta name="_csrf" th:content="${_csrf.token}"/>
-  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-</head>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="~{./header :: headerFragment}"></th:block>
 <!-- 사용자 스크립트 추가 -->
 <th:block layout:fragment="script">
-
   <script th:inline="javascript">
-
     $(document).ready(function(){
       $("input[name=cartChkBox]").change( function(){
         getOrderTotalPrice();
@@ -159,9 +152,7 @@
         }
       });
     }
-
   </script>
-
 </th:block>
 
 <!-- 사용자 CSS 추가 -->
@@ -191,14 +182,11 @@
   </style>
 </th:block>
 
-<div layout:fragment="content" class="content-mg">
-
-  <h2 class="mb-4">
-    장바구니 목록
-  </h2>
-
-  <div>
-
+<div class="main-container">
+	<div class="wrapper">
+		<div class="main-content">
+			<div class="login-title">장바구니</div>
+<div>
     <table class="table">
       <colgroup>
         <col width="15%"/>
@@ -259,7 +247,38 @@
     </div>
 
   </div>
-
+  
+		</div>
+	</div>
 </div>
 
+<th:block th:replace="~{./footer :: footerFragment}"></th:block>
+
+<div id="quick_menu">
+	<div class="quick_img_wrapper">
+		<a href="#" target="_blank">
+		<img class="quick_img" th:href="@{/images/quick_link_img.jpg}"></a>
+	</div>
+	<div class="side_menu">
+		<ul>
+			<!-- 로그아웃 상태의 사이드바 메뉴 -->
+			<li><a href="regist.html" class="link_menu" target="_blank">회원가입</a></li>
+			<li><a href="menu_Seasonal.html" class="link_menu"
+				target="_blank">제철특산품</a></li>
+			<!-- 로그인 상태의 사이드바 메뉴 -->
+			<!--    
+                <li><a href="basket.html" class="link_menu" target="_blank">장바구니</a></li>
+                <li><a href="#" class="link_menu" target="_blank">마이페이지</a></li>
+                <li><a href="#" class="link_menu" target="_blank">판매자신청</a></li>	
+                -->
+		</ul>
+	</div>
+</div>
+
+<div id="top_btn">
+	<a href="" onclick="goTop()"><img
+		th:src="@{/images/top_button.png}"></a>
+</div>
+
+</body>
 </html>

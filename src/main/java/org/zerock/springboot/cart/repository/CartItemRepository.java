@@ -17,4 +17,10 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
             "where ci.cart.id = :cartId " +
             "order by ci.regDate desc ")
     List<Object[]> findCartDetailDtoList(@Param("cartId") Long cartId);
+    
+    @Query("select ci, i " +
+    		"from CartItem ci " +
+    		"left outer join ci.item i " +
+    		"where ci.id = :cartItemId")
+    Object[] findByCartItemId(@Param("cartItemId") Long cartItemId);
 }

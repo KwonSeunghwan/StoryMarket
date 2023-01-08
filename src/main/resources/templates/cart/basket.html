@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="resources/css/common.css" type="text/css" rel="stylesheet">
+    <script src="resources/js/jquery-3.5.1.min.js"></script>
+    <script src="resources/js/jquery-user.js"></script>
+    <title>먹거리의 이야기 :: 스토리마켓</title>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="wrapper">
+                <div class="header-content">
+                    <div class="top-menu-content">
+                        <div class="top-menu">
+                            <ul class="head-menu">
+                                <li><a href="regist.html">회원가입</a></li>
+                                <li><a href="login.html">로그인</a></li>
+                                <li><a href="basket.html">장바구니</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="top-various-content">
+                        <div class="logo-content">
+                            <a href="index.html"><img src="resources/images/logo-01.png"></a>
+                        </div>
+                        <div class="search-content">
+                            <select class="search-list">
+                                <option disabled>선택</option>
+                                <option value="상품명">상품명</option>
+                                <option value="판매자">판매자</option>
+                            </select>
+    
+                            <input type="text" placeholder="상품명, 판매자로 검색">
+                            <a href="#"><img src="resources/images/search.png" class="search_img" alt="검색"></a>
+                        </div>
+                    </div>
+                    <div class="top-category">
+    
+                        <div class="menu-category">
+                            <div class="gnbmenu">
+                                <a href="#">   
+                                    <img src="resources/images/categorybtn.png">
+                                    카테고리
+                                </a>
+    
+                                <ul class="head-submenu"> <!-- absolute 되는 서브메뉴 -->
+                                    <li><a href="PC_LI_01.html">농산물</a></li>
+                                    <li><a href="PC_LI_02.html">수산물</a></li>
+                                    <li><a href="PC_LI_03.html">축산물</a></li>
+                                </ul>
+        
+                            </div>
+    
+                            
+                            <div class="main-category">
+                                <ul>
+                                    <li><a href="menu_Seasonal.html">제철특산품</a></li>
+                                    <li><a href="menu_ProdMap.html">특산품지도</a></li>
+                                    <li><a href="menu-Intro.html">마켓스토리</a></li>
+                                </ul>
+                            </div> 
+    
+                        </div>  
+    
+                    </div>
+    
+                   
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="main-container">
+        <div class="wrapper">
+            <div class="main-content">          
+                <div class="basket-title">
+                    <h2>장바구니</h2>
+                </div>
+                <div class="basket-content">
+                    <div class="basket-left-content">
+                        <div class="main-choice">
+                            <label class="check-label">
+                                <input type="checkbox"class="basket-checkbox">
+                                <span>전체선택</span>
+                            </label>
+                            <span class="area-line"></span>
+                            <button class="choice-check">선택삭제</button>
+                        </div>
+                        <div class="product-basket-content"> 
+                            <p class="none-product-basket">장바구니에 담긴 상품이 없습니다.</p> <!-- 장바구니가 비었을 경우 -->
+                            <ul> <!-- 장바구니에 물품이 있을 경우 -->
+                                <li>
+                                    <label class="check-label">
+                                        <input type="checkbox"class="basket-checkbox">
+                                    </label>
+                                    <a class="product-basket-image">
+                                        <img src="resources/images/good_pr_img10.jpg">
+                                    </a>
+                                    <div class="product-basket-title">
+                                        <a href="PC_DE_01.html">
+                                            [전남 해남] 포근한 기후의 해남에서 만나는 호박고구마 3kg
+                                        </a>
+                                    </div>
+                                    <div class="product-amount">
+                                        <button type="button" class="btn btn_type1 middle_btn pm_btn" id="amount_down">-</button>
+                                        <input type="number" id="product_amount" class="btn product_count_tmp middle_btn pm_btn" name="product_amount" min="1" max="10" value="1" required readonly />
+                                        <button type="button" class="btn btn_type1 middle_btn pm_btn" id="amount_up">+</button>                                
+                                    </div>
+                                    <div class="product-basket-price">
+                                        <span>
+                                          24,000원  
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul> <!-- </ul>-->
+                        
+                        </div>                        
+                    </div>
+                    <div class="basket-right-content">
+                        <div class="order-info-content">
+                            <div class="delivery-content">
+                                <h3>배송지</h3>
+                                <div class="delivery-addr-content">
+                                    <p class="delivery-addr">서울특별시 관악구 남부순환로 111-12나길 23 302호</p>
+                                </div>
+                            </div>
+                            <div class="product-price-info">
+                                <div class="product-basket-pr">
+                                    <span class="basket-product-txt">상품금액</span>
+                                    <span class="basket-total-price">24,000원</span>
+                                </div>
+                            </div>
+                            <div class="product-price-info">
+                                <div class="product-basket-pr">
+                                    <span class="basket-product-txt">배송비</span>
+                                    <span class="basket-total-price">+3,000원</span>
+                                </div>
+                            </div>
+                            <div class="product-price-info">
+                                <div class="product-basket-pr">
+                                    <span class="basket-product-txt">결제예정금액</span>
+                                    <span class="basket-total-price"><strong class="total">27,000</strong>원</span>
+                                </div>
+                            </div>
+                            <div class="order-btn-content">
+                                <a href="order.html"><button class="basket-order-btn">주문하기</button></a>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="wrapper">
+                <div class="main-content">
+                    <div class="main-footer">
+                        <div class="left-footer-content">
+                            <div class="footer-title">
+                                <h2>고객행복센터</h2>
+                            </div>
+                            <div class="footer-call">
+                                <h2>1644-1107</h2><h3>월~금요일 오전 7시 - 오후 6시</h3>
+                            </div>
+                            <div class="footer-inquire">
+                                <a href="#">카카오톡 문의</a>
+                                <div class="inquire-time">
+                                    월~금요일 | 오전 7시 - 오후 6시 <br />
+                                    일/공휴일 | 오전 7시 - 오후 1시
+                                </div>
+                            </div>
+                            <div class="footer-inquire">
+                                <a href="#">고객센터 문의</a>
+                                <div class="inquire-time">
+                                    365일 <br />
+                                    고객센터 운영시간에 순차적으로 답변드리겠습니다.
+                                </div>
+                            </div>
+                            <div class="footer-inquire">
+                                <a href="#">대량주문 문의</a>
+                                <div class="inquire-time">
+                                    월~금요일 | 오전 9시 - 오후 6시 <br />
+                                    점심시간 | 낮 12시 - 오후 1시
+                                </div>
+                            </div>
+                            <div class="email-inquire">
+                                비회원 문의 : <a href="#">story@market.com</a> <br />
+                                비회원 대량문의 : <a href="#">storygift@market.com</a>
+                            </div>
+                        </div>
+                        <div class="right-footer-content">
+                            <div class="footer-clause">
+                                <ul>
+                                    <li><a href="#">마켓소개</a></li>
+                                    <li><a href="#">마켓소개영상</a></li>
+                                    <li><a href="#">인재채용</a></li>
+                                    <li><a href="#">이용약관</a></li>
+                                    <li><a href="#">개인정보처리방침</a></li>
+                                    <li><a href="#">이용안내</a></li>
+                                </ul>
+                            </div>
+                            <div class="footer-info">
+                                법인명(상호):주식회사 스토리마켓 | 사업자등록번호:261-22-12345 <a href="#">사업자정보 확인</a> <br/>
+                                통신판매업:제 2022-서울강남-12345호 | 개인정보보호책임자:김연두 <br/>
+                                주소:서울특별시 강남구 테테전로 111, 23층 | 대표이사:김말랑 <br/>
+                                입점문의:<a href="#">입점문의하기</a> | 제휴문의:<a href="#">yeondu@market.com</a> <br/>
+                                채용문의:<a href="#">ringrabel@market.com</a> <br/>
+                                팩스: 070-7500-6098
+                            </div>
+                            <div class="footer-sns">
+                                <ul>
+                                    <li><a href="#"><img src="resources/images/foot_facebook.png"></a></li>
+                                    <li><a href="#"><img src="resources/images/foot_instargram.png"></a></li>
+                                    <li><a href="#"><img src="resources/images/foot_twitter.png"></a></li>
+                                    <li><a href="#"><img src="resources/images/foot_youtube.png"></a></li>
+                                </ul>    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-copy">
+                        마켓에서 판매되는 상품 중에는 마켓에 입점한 개별 판매자가 판매하는 마켓플레이스(오픈마켓) 상품이 포함되어 있습니다.<br/>
+                        마켓플레이스(오픈마켓) 상품의 경우 마켓은 통신판매중개자로서 통신판매의 당사자가 아닙니다. 마켓은 해당 상품의 주문, 품질, 교환/환불 등 의무와 책임을 부담하지 않습니다.
+                        <em class="copyright">© MARKET CORP. ALL RIGHTS RESERVED</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="quick_menu">
+        <div class="quick_img_wrapper">
+            <a href="#" target="_blank"><img class="quick_img" src="/resources/images/quick_link_img.jpg"></a>
+        </div>
+        <div class="side_menu">
+            <ul>
+                <!-- 로그아웃 상태의 사이드바 메뉴 -->
+        		<li><a href="regist.html" class="link_menu" target="_blank">회원가입</a></li>
+              	<li><a href="menu_Seasonal.html" class="link_menu" target="_blank">제철특산품</a></li>
+                <!-- 로그인 상태의 사이드바 메뉴 -->
+                <!--    
+                <li><a href="basket.html" class="link_menu" target="_blank">장바구니</a></li>
+                <li><a href="#" class="link_menu" target="_blank">마이페이지</a></li>
+                <li><a href="#" class="link_menu" target="_blank">판매자신청</a></li>	
+                -->	
+            </ul> 
+        </div>
+    </div>
+
+    <div id="top_btn">
+        <a href="" onclick="goTop()"><img src="/resources/images/top_button.png"></a>
+    </div>
+</body>
+</html>

@@ -1,7 +1,10 @@
 package org.zerock.springboot.order.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -9,15 +12,18 @@ import org.zerock.springboot.common.entity.BaseEntity;
 import org.zerock.springboot.item.entity.Item;
 
 @Entity
-@Getter @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@ToString(exclude = { "item", "order" })
 public class OrderItem extends BaseEntity{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_item_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 
@@ -25,26 +31,5 @@ public class OrderItem extends BaseEntity{
     @JoinColumn(name = "order_id")
     private Order order;
 
-    private int orderPrice; //주문가격
-
     private int count; //수량
-
-    public static OrderItem createOrderItem(Item item, int count){
-        OrderItem orderItem = new OrderItem();
-        orderItem.setItem(item);
-        orderItem.setCount(count);
-        orderItem.setOrderPrice(item.getPrice());
-
-        item.removeStock(count);
-        return orderItem;
-    }
-
-    public int getTotalPrice(){
-        return orderPrice * count;
-    }
-
-    public void cancel(){
-        this.getItem().addStock(count);
-    }
-
 }

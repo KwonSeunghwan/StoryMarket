@@ -10,6 +10,14 @@
 <script th:src="@{/js/jquery-3.5.1.min.js}"></script>
 <script th:src="@{/js/jquery-user.js}"></script>
 <title>먹거리의 이야기 :: 스토리마켓</title>
+<script type="text/javascript">
+$(document).ready(function(e) {
+	var csrfHeaderName = '[[${_csrf.headerName}]]'; 
+	var csrfTokenValue= '[[${_csrf.token}]]';
+	window.localStorage.setItem("csrfHeaderName", csrfHeaderName);
+	window.localStorage.setItem("csrfTokenValue", csrfTokenValue);
+});
+</script>
 </head>
 <body>
 		<header>

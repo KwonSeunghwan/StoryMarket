@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.springboot.cart.dto.CartDetailDto;
 import org.zerock.springboot.cart.dto.CartItemDto;
-import org.zerock.springboot.cart.dto.CartOrderDto;
 import org.zerock.springboot.cart.service.CartService;
 import org.zerock.springboot.member.dto.AuthMemberDTO;
 
@@ -30,7 +29,6 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class CartController {
-
     private final CartService cartService;
 
     @PostMapping(value = "/cart")
@@ -87,6 +85,7 @@ public class CartController {
         return new ResponseEntity<Long>(cartItemId, HttpStatus.OK);
     }
 
+    /*
     @PostMapping(value = "/cart/orders")
     public @ResponseBody ResponseEntity orderCartItem
             (@RequestBody CartOrderDto cartOrderDto, Principal principal){
@@ -105,5 +104,5 @@ public class CartController {
         Long orderId = cartService.orderCartItem(cartOrderDtoList, principal.getName());
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
-
+	*/
 }

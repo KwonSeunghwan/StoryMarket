@@ -2,9 +2,6 @@ package org.zerock.springboot.cart.service;
 
 import org.zerock.springboot.cart.dto.CartDetailDto;
 import org.zerock.springboot.cart.dto.CartItemDto;
-import org.zerock.springboot.cart.dto.CartOrderDto;
-import org.zerock.springboot.order.dto.OrderDto;
-import org.zerock.springboot.order.service.OrderService;
 import org.zerock.springboot.cart.entity.Cart;
 import org.zerock.springboot.cart.entity.CartItem;
 import org.zerock.springboot.item.entity.Item;
@@ -15,6 +12,8 @@ import org.zerock.springboot.cart.repository.CartRepository;
 import org.zerock.springboot.item.repository.ItemImgRepository;
 import org.zerock.springboot.item.repository.ItemRepository;
 import org.zerock.springboot.member.repository.MemberRepository;
+import org.zerock.springboot.order.dto.OrderRequest;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,13 +29,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class CartService {
-
     private final ItemRepository itemRepository;
     private final ItemImgRepository imageRepository;
     private final MemberRepository memberRepository;
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
-    private final OrderService orderService;
 
     public Long addCart(CartItemDto cartItemDto, String mid){
         Item item = itemRepository.findById(cartItemDto.getItemId())
@@ -90,7 +87,8 @@ public class CartService {
     private CartDetailDto entityToDto(CartItem ci, Item item) {
     	ItemImg ii = imageRepository.findByItemIdAndRepimgYn(item.getId(), "Y");
 		return new CartDetailDto(
-				ci.getId(), item.getItemNm(), item.getPrice(), ci.getCount(), ii.getImgUrl());
+				ci.getId(), item.getId(), item.getItemNm(), item.getPrice(), ci.getCount(), ii.getImgUrl()
+			);
 	}
 
 	@Transactional(readOnly = true)
@@ -121,6 +119,14 @@ public class CartService {
         cartItemRepository.delete(cartItem);
     }
 
+    @Transactional
+	public void deleteCartItems(List<OrderRequest> orderDtoList) {
+		for(OrderRequest orderRequest : orderDtoList) {
+			deleteCartItem(orderRequest.getCartItemId());
+		}
+	}
+
+    /*
     public Long orderCartItem(List<CartOrderDto> cartOrderDtoList, String mid){
         List<OrderDto> orderDtoList = new ArrayList<>();
         for(CartOrderDto cartOrderDto : cartOrderDtoList){
@@ -144,4 +150,5 @@ public class CartService {
         }
         return orderId;
     }
+    */
 }

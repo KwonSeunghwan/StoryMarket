@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.zerock.springboot.constant.OrderStatus;
 import org.zerock.springboot.order.entity.Order;
+import org.zerock.springboot.order.entity.OrderState;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,10 +14,10 @@ import lombok.Setter;
 @Getter @Setter
 public class OrderHistDto {
 
-    public OrderHistDto(Order order){
+    public OrderHistDto(Order order, OrderState os){
         this.orderId = order.getId();
-        this.orderDate = order.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        this.orderStatus = order.getOrderStatus();
+        this.orderDate = order.getRegDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        this.orderStatus = os.getOrderStatus();
     }
 
     private Long orderId; //주문아이디
@@ -26,9 +27,9 @@ public class OrderHistDto {
     private OrderStatus orderStatus; //주문 상태
 
     //주문 상품 리스트
-    private List<OrderItemDto> orderItemDtoList = new ArrayList<>();
+    private List<OrderItemDto2> orderItemDtoList = new ArrayList<>();
 
-    public void addOrderItemDto(OrderItemDto orderItemDto){
+    public void addOrderItemDto(OrderItemDto2 orderItemDto){
         orderItemDtoList.add(orderItemDto);
     }
 
