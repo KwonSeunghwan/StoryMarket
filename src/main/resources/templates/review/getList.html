@@ -1,0 +1,22 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="comment-count">
+	<span class="cm-c" th:text="'총 ' + ${result.criTotal} + '개'">총 2개</span>
+</div>
+<div th:each="dto : ${result.dtoList}" class="comment-view-content">
+	<div class="comment-left-content">
+		<span class="comment-name" th:text="${dto.name}">김연두</span>
+	</div>
+	<div class="comment-right-content">
+		<!-- 
+		<h3 class="product-title-comment" th:text="${dto.">[전남 해남] 포근한 기후의 해남에서 만나는 호박고구마
+			3kg</h3>
+			 -->
+		<p class="comment" th:text="${dto.text}">정말 달달하고 저희 애들이 참 좋아해요~ 가격도 이뽀이뽀 정도 ^^</p>
+		<div class="comment-img">
+			<img th:src="|/display?fileName=${dto.imgPath}|">
+		</div>
+		<div class="comment-date-content">
+			<span class="comment-date" th:text="${#temporals.format(dto.regDate, 'yyyy.MM.dd')}">2022.10.16</span>
+		</div>
+	</div>
+</div>

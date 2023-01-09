@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.springboot.common.dto.PageRequestDTO;
 import org.zerock.springboot.item.dto.ItemDTO;
 import org.zerock.springboot.item.service.ItemService;
 import org.zerock.springboot.review.dto.ReviewDTO;
@@ -31,13 +32,12 @@ public class ReviewController {
 	private final ReviewService reviewService;
 	private final ItemService itemService;
 	
-//	@GetMapping("/{mno}/all")
-//    public ResponseEntity<List<ReviewDTO>> getList(@PathVariable("ino") Long ino){
-//        log.info("--------------list---------------");
-//        log.info("INO: " + ino);
-//        List<ReviewDTO> reviewDTOList = reviewService.getListOfItem(ino);
-//        return new ResponseEntity<>(reviewDTOList, HttpStatus.OK);
-//    }
+	@GetMapping("/getList")
+    public void getList(Long itemId, PageRequestDTO pageRequestDTO, Model model){
+        log.info("--------------list---------------");
+        log.info("INO: " + itemId);
+        model.addAttribute("result", reviewService.getListOfItem(itemId, pageRequestDTO));
+    }
 	
 	@GetMapping("/register")
 	public void registerGet(Long itemId, Model model) {
@@ -49,7 +49,9 @@ public class ReviewController {
     @PostMapping("/register")
     public String addReview(ReviewRegForm regForm, RedirectAttributes rttr){
     	log.info("addReview..." + regForm);
-    	reviewService.register(regForm);
+    	Long reviewNum = reviewService.register(regForm);
+    	rttr.addFlashAttribute("reviewNum", reviewNum);
+    	return "redirect:/review/list";
     }
 
 //    @PutMapping("/{mno}/{reviewnum}")

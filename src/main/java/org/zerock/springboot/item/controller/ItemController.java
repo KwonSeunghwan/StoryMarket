@@ -73,7 +73,6 @@ public class ItemController {
         }
         
         return "item/itemDtl";
-//        return "item/itemForm";
     }
 
     /*

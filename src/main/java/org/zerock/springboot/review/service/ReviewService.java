@@ -2,6 +2,8 @@ package org.zerock.springboot.review.service;
 
 import java.util.List;
 
+import org.zerock.springboot.common.dto.PageRequestDTO;
+import org.zerock.springboot.common.dto.PageResultDTO;
 import org.zerock.springboot.item.entity.Item;
 import org.zerock.springboot.member.entity.Member;
 import org.zerock.springboot.review.dto.ReviewDTO;
@@ -10,9 +12,8 @@ import org.zerock.springboot.review.entity.Review;
 
 public interface ReviewService {
 	//상품의 모든 리뷰를 가져온다.
-    List<ReviewDTO> getListOfItem(Long ino);
-    //상품 리뷰를 추가
-    Long register(ReviewDTO itemReviewDTO);
+	PageResultDTO<ReviewDTO, Review> getListOfItem(Long ino, PageRequestDTO pageRequestDTO);
+
     //특정한 상품리뷰 수정
     void modify(ReviewDTO itemReviewDTO);
     //상품 리뷰 삭제
@@ -45,5 +46,5 @@ public interface ReviewService {
         return itemReviewDTO;
     }
     
-	void register(ReviewRegForm regForm);
+	Long register(ReviewRegForm regForm);
 }

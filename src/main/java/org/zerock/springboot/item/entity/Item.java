@@ -17,12 +17,12 @@ import org.zerock.springboot.member.entity.Member;
 
 @Entity
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "item")
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class Item extends BaseEntity{
     @Id
     @Column(name = "item_id")
