@@ -2,6 +2,7 @@ package org.zerock.springboot.order.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -11,11 +12,16 @@ import org.thymeleaf.util.StringUtils;
 import org.zerock.springboot.cart.entity.CartItem;
 import org.zerock.springboot.cart.repository.CartItemRepository;
 import org.zerock.springboot.constant.OrderStatus;
+import org.zerock.springboot.item.dto.ItemDTO;
+import org.zerock.springboot.item.dto.ItemImgDto;
 import org.zerock.springboot.item.entity.Item;
-import org.zerock.springboot.item.repository.ItemRepository;
+import org.zerock.springboot.item.entity.ItemImg;
+import org.zerock.springboot.item.repository.ItemImgRepository;
+import org.zerock.springboot.member.dto.MemberDTO;
 import org.zerock.springboot.member.entity.Member;
 import org.zerock.springboot.member.repository.MemberRepository;
-import org.zerock.springboot.order.dto.OrderHistDto;
+import org.zerock.springboot.order.dto.OrderDTO;
+import org.zerock.springboot.order.dto.OrderItemDTO;
 import org.zerock.springboot.order.dto.OrderRequest;
 import org.zerock.springboot.order.entity.Order;
 import org.zerock.springboot.order.entity.OrderItem;
@@ -30,12 +36,12 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 @RequiredArgsConstructor
 public class OrderService {
-    private final ItemRepository itemRepository;
     private final MemberRepository memberRepository;
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
     private final OrderStateRepository orderStateRepository;
     private final CartItemRepository cartItemRepository;
+    private final ItemImgRepository imageRepository;
 
     /*
     public Long order(OrderDto orderDto, String mid){
@@ -160,8 +166,81 @@ public class OrderService {
 		return order.getId();
 	}
 
-	public List<OrderHistDto> getOrderInfoList(String loginId, Long orderId) {
-		// TODO Auto-generated method stub
-		return null;
+	public OrderDTO getOrderInfo(String loginId, Long orderId) {
+		Object[] result = orderRepository.getOrderInfo(loginId, orderId);
+		Object[] orderitems = (Object[])result[0];
+		OrderDTO dto = entityToDto((Order)orderitems[0], (OrderState)orderitems[1], (Member)orderitems[4]);
+		List<OrderItemDTO> list = dto.getOrderItemList();
+		int total = 0;
+		for(Object obj : result) {
+			Object[] ois = (Object[])obj;
+			OrderItemDTO oiDTO = entityToDTOConversion((Order)ois[0], (OrderItem)ois[2], (Item)ois[3]);
+			total += (oiDTO.getCount() * oiDTO.getItem().getPrice());
+			list.add(oiDTO);
+		}
+		dto.setOrderItemList(list);
+		dto.setTotal(total);
+		return dto;
+	}
+
+	private OrderItemDTO entityToDTOConversion(Order order, OrderItem oi, Item item) {
+		List<ItemImg> imgList = imageRepository.findByItemIdOrderByIdAsc(oi.getId());
+		List<ItemImgDto> imgDTOList = imgList.stream().map(en -> ItemImgDto.of(en)).collect(Collectors.toList());
+		ItemDTO dto = itemEntityToItemDTO(item, imgDTOList);
+		OrderItemDTO oiDTO = OrderItemDTO.builder()
+				.orderItemId(oi.getId())
+				.item(dto)
+				.orderId(order.getId())
+				.count(oi.getCount())
+				.regDate(oi.getRegDate())
+				.modDate(oi.getModDate())
+				.build();
+		return oiDTO;
+	}
+
+	private ItemDTO itemEntityToItemDTO(Item item, List<ItemImgDto> imgDTOList) {
+		ItemDTO itemDTO = ItemDTO.builder()
+				.itemId(item.getId())
+				.registerId(item.getRegister().getId())
+				.category(item.getCategory())
+				.delivery(item.getDelivery())
+				.itemNm(item.getItemNm())
+				.price(item.getPrice())
+				.regDate(item.getRegDate())
+				.modDate(item.getModDate())
+				.imgList(imgDTOList)
+				.build();
+		return itemDTO;
+	}
+
+	private OrderDTO entityToDto(Order order, OrderState os, Member m) {
+		MemberDTO orderer = memberEntityToMemberDTO(m);
+		OrderDTO dto = OrderDTO.builder()
+				.orderId(order.getId())
+				.orderStatus(os.getOrderStatus())
+				.orderer(orderer)
+				.regDate(order.getRegDate())
+				.modDate(order.getModDate())
+				.build();
+		return dto;
+	}
+
+	private MemberDTO memberEntityToMemberDTO(Member m) {
+		MemberDTO dto = MemberDTO.builder()
+				.loginId(m.getId())
+				.password(m.getPassword())
+				.name(m.getName())
+				.email(m.getEmail())
+				.phone(m.getPhone())
+				.postCode(m.getPostCode())
+				.addr(m.getAddr())
+				.detAddr(m.getDetAddr())
+				.gender(m.getGender())
+				.birthday(m.getBirthday())
+				.role(m.getRole())
+				.regDate(m.getRegDate())
+				.modDate(m.getModDate())
+				.build();
+		return dto;
 	}
 }

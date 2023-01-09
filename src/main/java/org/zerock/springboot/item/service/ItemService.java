@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.springboot.item.dto.ItemDTO;
 import org.zerock.springboot.item.dto.ItemFormDto;
 import org.zerock.springboot.item.dto.ItemImgDto;
 import org.zerock.springboot.item.dto.ItemSearchDto;
@@ -97,4 +98,28 @@ public class ItemService {
     public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
         return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
+
+	public ItemDTO getItem(Long itemId) {
+		Optional<Item> result = itemRepository.findById(itemId);
+		if(result.isPresent()) {
+			Item item = result.get();
+			ItemDTO dto = entityToDTO(item);
+			return dto;
+		}
+		return null;
+	}
+
+	private ItemDTO entityToDTO(Item item) {
+		ItemDTO itemDTO = ItemDTO.builder()
+				.itemId(item.getId())
+				.registerId(item.getRegister().getId())
+				.category(item.getCategory())
+				.delivery(item.getDelivery())
+				.itemNm(item.getItemNm())
+				.price(item.getPrice())
+				.regDate(item.getRegDate())
+				.modDate(item.getModDate())
+				.build();
+		return itemDTO;
+	}
 }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="~{./header :: headerFragment}"></th:block>
+    <div class="main-container">
+        <div class="wrapper">
+            <div class="main-content">  
+                
+                <div class="login-title">
+                    주문정보
+                </div>
+                <div class="order-frm">
+                    <div class="orderInfo-content">
+                        <p class="orderInfo-title">[<span th:text="${orders.orderer.name}"></span>님의 주문 정보입니다]</p>
+                    </div>
+                    <div class="orderInfo-content">
+                        <div class="orderInfo-fl">
+                            <p class="order-main-txt">총 결제금액</p>
+                            <p class="order-main-price" style="font-size:25px"><span th:text="${orders.total + 3000}">33,700</span>원</p>
+                        </div> 
+                    </div>
+                    <div class="orderInfo-content">
+                        <p class="orderInfo-title">[구매하신 상품 정보입니다]</p>
+                    </div>
+                    <div class="orderInfo-content">
+                        <div th:each="oi : ${orders.orderItemList}" class="orderInfo-fl">
+                            <p class="order-main-txt" th:text="${oi.item.itemNm}">[경북 안동] 전통의 맛, 간고등어</p>
+                            <p class="order-main-price"><span th:text="${oi.item.price}">13,700</span>원</p>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+<th:block th:replace="~{./footer :: footerFragment}"></th:block>
+    <div id="quick_menu">
+        <div class="quick_img_wrapper">
+            <a href="#" target="_blank"><img class="quick_img" src="/images/quick_link_img.jpg"></a>
+        </div>
+        <div class="side_menu">
+            <ul>
+                <!-- 로그아웃 상태의 사이드바 메뉴 -->
+        		<li><a href="regist.html" class="link_menu" target="_blank">회원가입</a></li>
+              	<li><a href="menu_Seasonal.html" class="link_menu" target="_blank">제철특산품</a></li>
+                <!-- 로그인 상태의 사이드바 메뉴 -->
+                <!--    
+                <li><a href="basket.html" class="link_menu" target="_blank">장바구니</a></li>
+                <li><a href="#" class="link_menu" target="_blank">마이페이지</a></li>
+                <li><a href="#" class="link_menu" target="_blank">판매자신청</a></li>	
+                -->	
+            </ul>       
+        </div>
+    </div>
+
+    <div id="top_btn">
+        <a href="" onclick="goTop()"><img src="/images/top_button.png"></a>
+    </div>  
+    
+</body>
+</html>

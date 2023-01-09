@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="~{./header :: headerFragment}"></th:block>
+    <div class="main-container">
+        <div class="wrapper">
+            <div class="main-content">
+                <form action="register" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="ino" th:value="${item.itemId}">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <input type="hidden" name="loginId" th:value="${#authentication.principal.member.loginId}">
+                    <div class="post-caption">
+                      <h2>후기 작성</h2>
+                    </div>
+
+                    <div class="form-main">
+                      <div class="post-title">
+                       상품명 
+                      </div>
+                      <div class="main-title title-txt">
+                        <input type="text" id="title" th:value="${item.itemNm}" readonly>
+                      </div>
+                    </div>
+        
+                    <div class="form-main">
+                      <div class="post-title">
+                        후기 내용을 입력해주세요!<span class="icon">*</span>
+                      </div>
+                      <div class="main-title content-text">
+                        <textarea id="content" placeholder="50자 이내로 작성해주세요." name="text"></textarea>
+                      </div>
+                    </div>
+    
+                    <div class="form-main">
+                        <div class="post-title">
+                          후기 사진 업로드<span class="icon">*</span>
+                        </div>
+                        <div class="post-sub-title">
+                          다른 사람들을 위해 정확한 사진을 등록해주세요.
+                        </div>
+                        <div class="photo-upload">
+                          <input type="file" name="imgFile">
+                        </div>
+                    </div>
+
+                    
+                    <div class="post-btn-form"> 
+                      <input class="btn btn_type1 pa-lf-100" type="submit" value="등록하기">
+                    </div>
+                  </form>
+
+
+            </div>
+        </div>
+    </div>
+
+    
+    <footer>
+        <div class="footer-container">
+            <div class="wrapper">
+                <div class="main-content">
+                    <div class="main-footer">
+                        <div class="left-footer-content">
+                            <div class="footer-title">
+                                <h2>고객행복센터</h2>
+                            </div>
+                            <div class="footer-call">
+                                <h2>1644-1107</h2><h3>월~금요일 오전 7시 - 오후 6시</h3>
+                            </div>
+                            <div class="footer-inquire">
+                                <a href="#">카카오톡 문의</a>
+                                <div class="inquire-time">
+                                    월~금요일 | 오전 7시 - 오후 6시 <br />
+                                    일/공휴일 | 오전 7시 - 오후 1시
+                                </div>
+                            </div>
+                            <div class="footer-inquire">
+                                <a href="#">고객센터 문의</a>
+                                <div class="inquire-time">
+                                    365일 <br />
+                                    고객센터 운영시간에 순차적으로 답변드리겠습니다.
+                                </div>
+                            </div>
+                            <div class="footer-inquire">
+                                <a href="#">대량주문 문의</a>
+                                <div class="inquire-time">
+                                    월~금요일 | 오전 9시 - 오후 6시 <br />
+                                    점심시간 | 낮 12시 - 오후 1시
+                                </div>
+                            </div>
+                            <div class="email-inquire">
+                                비회원 문의 : <a href="#">story@market.com</a> <br />
+                                비회원 대량문의 : <a href="#">storygift@market.com</a>
+                            </div>
+                        </div>
+                        <div class="right-footer-content">
+                            <div class="footer-clause">
+                                <ul>
+                                    <li><a href="#">마켓소개</a></li>
+                                    <li><a href="#">마켓소개영상</a></li>
+                                    <li><a href="#">인재채용</a></li>
+                                    <li><a href="#">이용약관</a></li>
+                                    <li><a href="#">개인정보처리방침</a></li>
+                                    <li><a href="#">이용안내</a></li>
+                                </ul>
+                            </div>
+                            <div class="footer-info">
+                                법인명(상호):주식회사 스토리마켓 | 사업자등록번호:261-22-12345 <a href="#">사업자정보 확인</a> <br/>
+                                통신판매업:제 2022-서울강남-12345호 | 개인정보보호책임자:김연두 <br/>
+                                주소:서울특별시 강남구 테테전로 111, 23층 | 대표이사:김말랑 <br/>
+                                입점문의:<a href="#">입점문의하기</a> | 제휴문의:<a href="#">yeondu@market.com</a> <br/>
+                                채용문의:<a href="#">ringrabel@market.com</a> <br/>
+                                팩스: 070-7500-6098
+                            </div>
+                            <div class="footer-sns">
+                                <ul>
+                                    <li><a href="#"><img src="/images/foot_facebook.png"></a></li>
+                                    <li><a href="#"><img src="/images/foot_instargram.png"></a></li>
+                                    <li><a href="#"><img src="/images/foot_twitter.png"></a></li>
+                                    <li><a href="#"><img src="/images/foot_youtube.png"></a></li>
+                                </ul>    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-copy">
+                        마켓에서 판매되는 상품 중에는 마켓에 입점한 개별 판매자가 판매하는 마켓플레이스(오픈마켓) 상품이 포함되어 있습니다.<br/>
+                        마켓플레이스(오픈마켓) 상품의 경우 마켓은 통신판매중개자로서 통신판매의 당사자가 아닙니다. 마켓은 해당 상품의 주문, 품질, 교환/환불 등 의무와 책임을 부담하지 않습니다.
+                        <em class="copyright">© MARKET CORP. ALL RIGHTS RESERVED</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="quick_menu">
+        <div class="quick_img_wrapper">
+            <a href="#" target="_blank"><img class="quick_img" src="/images/quick_link_img.jpg"></a>
+        </div>
+        <div class="side_menu">
+            <ul>
+                <!-- 로그아웃 상태의 사이드바 메뉴 -->
+        		<li><a href="regist.html" class="link_menu" target="_blank">회원가입</a></li>
+              	<li><a href="menu_Seasonal.html" class="link_menu" target="_blank">제철특산품</a></li>
+                <!-- 로그인 상태의 사이드바 메뉴 -->
+                <!--    
+                <li><a href="basket.html" class="link_menu" target="_blank">장바구니</a></li>
+                <li><a href="#" class="link_menu" target="_blank">마이페이지</a></li>
+                <li><a href="#" class="link_menu" target="_blank">판매자신청</a></li>	
+                -->	
+            </ul>       
+        </div>
+    </div>
+
+    <div id="top_btn">
+        <a href="" onclick="goTop()"><img src="/images/top_button.png"></a>
+    </div>  
+    
+</body>
+</html>

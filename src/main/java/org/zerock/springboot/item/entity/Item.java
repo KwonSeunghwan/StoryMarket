@@ -1,6 +1,9 @@
 package org.zerock.springboot.item.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -13,10 +16,13 @@ import org.zerock.springboot.item.dto.ItemFormDto;
 import org.zerock.springboot.member.entity.Member;
 
 @Entity
+@Builder
 @Table(name = "item")
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Item extends BaseEntity{
     @Id
     @Column(name = "item_id")

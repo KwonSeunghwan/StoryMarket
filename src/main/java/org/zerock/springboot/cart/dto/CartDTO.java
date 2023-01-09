@@ -27,7 +27,7 @@ public class CartDTO {
     private String loginId;
     
     @Builder.Default
-    List<CartDetailDto> itemList = new ArrayList<>();
+    private List<CartDetailDto> itemList = new ArrayList<>();
     
     private LocalDateTime regDate;
 	private LocalDateTime modDate;

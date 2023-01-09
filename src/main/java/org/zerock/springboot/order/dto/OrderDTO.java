@@ -2,7 +2,9 @@ package org.zerock.springboot.order.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
 
+import org.zerock.springboot.constant.OrderStatus;
 import org.zerock.springboot.member.dto.MemberDTO;
 
 import lombok.AllArgsConstructor;
@@ -18,8 +20,11 @@ import lombok.ToString;
 @ToString
 public class OrderDTO {
 	private Long orderId;
+	private int total;
+	private OrderStatus orderStatus;
 	private MemberDTO orderer;
-	private List<OrderItemDTO> orderItemList;
+	@Builder.Default
+	private List<OrderItemDTO> orderItemList = new ArrayList<>();
 	private LocalDateTime regDate;
 	private LocalDateTime modDate;
 }

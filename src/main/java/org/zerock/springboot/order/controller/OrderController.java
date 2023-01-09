@@ -1,24 +1,18 @@
 package org.zerock.springboot.order.controller;
 
-import java.awt.print.Pageable;
 import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.springboot.cart.service.CartService;
-import org.zerock.springboot.order.dto.OrderHistDto;
+import org.zerock.springboot.order.dto.OrderDTO;
 import org.zerock.springboot.order.dto.OrderRegisterForm;
 import org.zerock.springboot.order.dto.OrderRequest;
 import org.zerock.springboot.order.service.OrderService;
@@ -56,12 +50,22 @@ public class OrderController {
 
     @GetMapping("/show")
     public String orderHist(Long orderId, Principal principal, Model model) {
-        List<OrderHistDto> ordersHistDtoList = orderService.getOrderInfoList(principal.getName(), orderId);
+        OrderDTO orderInfo = orderService.getOrderInfo(principal.getName(), orderId);
 
-        model.addAttribute("orders", ordersHistDtoList);
+        model.addAttribute("orders", orderInfo);
 
-        return "order/orderHist";
+        return "order/order";
     }
+    
+    @GetMapping("/info")
+    public String orderInfo(Long orderId, Principal principal, Model model) {
+    	OrderDTO orderInfo = orderService.getOrderInfo(principal.getName(), orderId);
+
+        model.addAttribute("orders", orderInfo);
+
+        return "order/orderInfo";
+    }
+    
 
     /*
     @PostMapping(value = "/order")
